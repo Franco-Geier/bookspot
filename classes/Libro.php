@@ -43,7 +43,20 @@
         }
 
 
+        public static function where($columna, $valor) {
+            $query = "
+                SELECT libros.*, 
+                       categorias.nombre AS categoria, 
+                       editoriales.nombre AS editorial
+                FROM " . static::$tabla . "
+                LEFT JOIN categorias ON libros.id_categoria = categorias.id
+                LEFT JOIN editoriales ON libros.id_editorial = editoriales.id
+                WHERE ${columna} = '" . self::$db->escape_string($valor) . "'";
+            
+            return self::consultarSQL($query);
+        }
         
+
         public static function find($id) {
             $query = "
                 SELECT libros.*, 
@@ -99,12 +112,14 @@
             } elseif (mb_strlen($this->descripcion) < 50 || mb_strlen($this->descripcion) > 200) {
                 self::$errores[] = "La descripción debe tener entre 50 y 200 caracteres.";
             }
-    
-            if (!filter_var($this->precio, FILTER_VALIDATE_FLOAT)) {
-                self::$errores[] = "El precio debe ser un número válido.";
-            } elseif ($this->precio < 5000 || $this->precio > 90000) {
-                self::$errores[] = "El precio debe estar entre 5000 y 90000.";
+
+
+            if (!preg_match('/^\d{1,8}(\.\d{1,2})?$/', $this->precio)) {
+                self::$errores[] = "El precio debe ser un número decimal válido con hasta 2 decimales.";
+            } elseif ($this->precio < 1000 || $this->precio > 150000) {
+                self::$errores[] = "El precio debe estar entre 1000 y 150000.";
             }
+
     
             if (!filter_var($this->stock, FILTER_VALIDATE_INT)) {
                 self::$errores[] = "El stock debe ser un número entero válido.";

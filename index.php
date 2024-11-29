@@ -2,7 +2,10 @@
     require "includes/app.php";
     $titulo = "BookSpot - Inicio";
     $descripcion = "BookSpot es la mejor página web para comprar libros.";
-    incluirTemplate("header", $inicio = true, $titulo, $descripcion);
+    use App\Categoria;
+    $categorias = Categoria::all();
+    $limite = 3; // Muestra los últimos tres 
+    incluirTemplate("header", true, $titulo, $descripcion, ['categorias' => $categorias]);
 ?>
 
     <main class="contenedor seccion">
@@ -36,7 +39,6 @@
         <h2>Últimos libros en venta</h2>
 
         <?php
-            $limite = 3; // Muestra los últimos tres libros
             include "includes/templates/anuncios.php";
         ?>
 

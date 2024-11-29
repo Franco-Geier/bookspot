@@ -1,8 +1,10 @@
 <?php
     require "includes/app.php";
     $titulo = "BookSpot - Anuncios";
-    $descripcion = "Mira nuestras ofertas.";
-    incluirTemplate("header", $inicio = false, $titulo, $descripcion);
+    $descripcion = "Mira nuestros libros en venta.";
+    use App\Categoria;
+    $categorias = Categoria::all();
+    incluirTemplate("header", false, $titulo, $descripcion, ['categorias' => $categorias]);
 ?>
 
     <main class="contenedor seccion">

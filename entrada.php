@@ -2,7 +2,9 @@
     require "includes/app.php";
     $titulo = "BookSpot - Entrada";
     $descripcion = "Visita nuestras entradas de blog";
-    incluirTemplate("header", $inicio = false, $titulo, $descripcion);
+    use App\Categoria;
+    $categorias = Categoria::all();
+    incluirTemplate("header", false, $titulo, $descripcion, ['categorias' => $categorias]);
 ?>
 
     <main class="contenedor seccion contenido-centrado">

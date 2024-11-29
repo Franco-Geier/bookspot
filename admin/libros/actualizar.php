@@ -1,14 +1,16 @@
 <?php
 
     require "../../includes/app.php";
+    $titulo = "BookSpot - Actualizar";
+    $descripcion = "Zona de actualización de libros.";
 
+    estaAutenticado();
+    
     use App\Libro;
     use App\Categoria;
     use App\Editorial;
     use Intervention\Image\ImageManager;
     use Intervention\Image\Drivers\GD\Driver;
-
-    estaAutenticado();
 
     // Validar la URL por ID válido
     $id = filter_var($_GET["id"] ?? null, FILTER_VALIDATE_INT);
@@ -35,7 +37,6 @@
 
     // Ejecutar el código después de que el ususario envia el formulario
     if($_SERVER["REQUEST_METHOD"] === "POST") {
-
         // Asignar los atributos
         $args = $_POST["libro"];
         
@@ -44,15 +45,12 @@
         // Validación
         $errores = $libro->validar();
 
-        // Generar un nombre único para la imagen
-        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-
         /** SETEAR LA IMAGEN **/
         if($_FILES["libro"]["tmp_name"]["imagen"]) {
-
+            // Generar un nombre único para la imagen
+            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
             // Crear instancia del driver y del ImageManager
             $manager = new ImageManager(new Driver());
-
             // Procesar la imagen con el método read
             $imagen = $manager->read($_FILES["libro"]["tmp_name"]["imagen"]); // Cargar la imagen
             
@@ -70,7 +68,7 @@
             $libro->guardar();
         }
     }
-    incluirTemplate("header");
+    incluirTemplate("header", false, $titulo, $descripcion, ['categorias' => $categorias]);
 ?>
 
     <main class="contenedor seccion">

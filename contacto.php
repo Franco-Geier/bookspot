@@ -2,7 +2,9 @@
     require "includes/app.php";
     $titulo = "BookSpot - Contacto";
     $descripcion = "Contáctanos si tienes dudas";
-    incluirTemplate("header", $inicio = false, $titulo, $descripcion);
+    use App\Categoria;
+    $categorias = Categoria::all();
+    incluirTemplate("header", false, $titulo, $descripcion, ['categorias' => $categorias]);
 ?>
 
     <h1>Contacto</h1>

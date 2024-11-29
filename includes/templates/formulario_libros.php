@@ -39,10 +39,11 @@
                         <input
                             type="number"
                             name="libro[precio]"
-                            placeholder="Ej: 6000"
+                            placeholder="Ej: 6000.50"
                             name="precio"
-                            min="5000"
-                            max="90000"
+                            min="1000"
+                            max="150000"
+                            step="0.01"
                             id="precio"
                             value="<?php echo s($libro->precio); ?>">
                     </div>

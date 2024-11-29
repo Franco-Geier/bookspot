@@ -181,6 +181,7 @@
         }
 
         
+        
         // Busca un registro por su id
         public static function find($id) {
             $query = "SELECT * FROM " . static::$tabla . " WHERE id = ${id}";

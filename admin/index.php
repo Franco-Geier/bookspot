@@ -1,10 +1,15 @@
 <?php
     
     require "../includes/app.php";
+    $titulo = "BookSpot - Admin";
+    $descripcion = "Zona de administración de libros.";
+    
     estaAutenticado();
 
     // Importar las clases
     use App\Libro;
+    use App\Categoria;
+    $categorias = Categoria::all();
     $libros = Libro::librosConRelaciones();
 
     // Muestra mensaje condicional
@@ -21,7 +26,7 @@
         }
     }
 
-    incluirTemplate("header");
+    incluirTemplate("header", false, $titulo, $descripcion, ['categorias' => $categorias]);
 ?>
 
     <main class="contenedor seccion">
@@ -91,7 +96,5 @@
     </main>
 
 <?php
-    mysqli_close($db); // Cerrar la conexión
-
     incluirTemplate("footer");
 ?>

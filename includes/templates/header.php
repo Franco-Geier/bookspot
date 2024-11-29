@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($titulo, ENT_QUOTES, 'UTF-8'); ?></title>
-    <meta name="description" content="<?php echo htmlspecialchars($descripcion, ENT_QUOTES, 'UTF-8'); ?>">
+    <title><?php echo s($titulo, ENT_QUOTES, 'UTF-8'); ?></title>
+    <meta name="description" content="<?php echo s($descripcion, ENT_QUOTES, 'UTF-8'); ?>">
     <!-- Preload del CSS de normalización -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg==" crossorigin="anonymous" as="style"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css" integrity="sha512-q6WgHqiHlKyOqslT/lgBgodhd03Wp4BEqKeW6nNtlOY4quzyG3VoQKFrieaCeSnuVseNKRGpGeDU3qPmabCANg==" crossorigin="anonymous"/>
@@ -41,9 +41,17 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">lorem</a></li>
-                                        <li><a class="dropdown-item" href="#">ipsum</a></li>
-                                        <li><a class="dropdown-item" href="#">mutat balde</a></li>
+                                        <?php if (!empty($categorias)): ?>
+                                            <?php foreach ($categorias as $categoria): ?>
+                                                <li>
+                                                    <a class="dropdown-item" href="/31-bookspot/bookspot/categorias.php?id=<?php echo s($categoria->id); ?>">
+                                                        <?php echo s($categoria->nombre); ?>
+                                                    </a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <li><a class="dropdown-item" href="#">No hay categorías disponibles</a></li>
+                                        <?php endif; ?>
                                     </ul>
                                 </li>
                             </ul>

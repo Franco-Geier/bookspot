@@ -1,12 +1,15 @@
 <?php
     require "includes/app.php";
-    
+    $titulo = "Bookspot - Anuncio";
+    $descripcion = "El producto que seleccionaste";
     use App\Libro;
+    use App\Categoria;
+    $categorias = Categoria::all();
 
     // Validar la URL por ID válido
     $id = filter_var($_GET["id"] ?? null, FILTER_VALIDATE_INT);
     if (!$id) {
-        header("location: ./");
+        header("Location: ./");
         exit;
     }
 
@@ -17,9 +20,7 @@
         exit;
     }
 
-    $titulo = "Bookspot - Anuncio";
-    $descripcion = "El producto que seleccionaste";
-    incluirTemplate("header", $inicio = false, $titulo, $descripcion);
+    incluirTemplate("header", false, $titulo, $descripcion, ['categorias' => $categorias]);
 ?>
 
     <main class="contenedor seccion">

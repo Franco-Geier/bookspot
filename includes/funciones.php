@@ -4,7 +4,14 @@
     define("FUNCIONES_URL", __DIR__ . "funciones.php");
     define("CARPETA_IMAGENES", __DIR__ . "/../imagenes/");
 
-    function incluirTemplate(string $nombre, bool $inicio = false, string $titulo = "BookSpot", string $descripcion = "BookSpot es tu plataforma de confianza para libros.") {
+    function incluirTemplate(
+        string $nombre, 
+        bool $inicio = false, 
+        string $titulo = "BookSpot", 
+        string $descripcion = "BookSpot es tu plataforma de confianza para libros.",
+        array $datos = []
+    ) {
+        extract($datos);
         include TEMPLATES_URL . "/${nombre}.php";
     }
 

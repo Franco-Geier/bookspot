@@ -44,7 +44,9 @@
 
     $titulo = "Bookspot - Login-Admins";
     $descripcion = "inicia sesión como admin";
-    incluirTemplate("header", $inicio = false, $titulo, $descripcion);
+    use App\Categoria;
+    $categorias = Categoria::all();
+    incluirTemplate("header", false, $titulo, $descripcion, ['categorias' => $categorias]);
 ?>
     <main class="contenedor seccion">
         <h1>Iniciar Sesión</h1>
