@@ -189,25 +189,6 @@
         }
 
 
-        public static function librosConRelaciones($limite = null) {
-            $query = "
-                SELECT libros.*, 
-                       categorias.nombre AS categoria,
-                       editoriales.nombre AS editorial
-                FROM " . static::$tabla . "
-                LEFT JOIN categorias ON libros.id_categoria = categorias.id
-                LEFT JOIN editoriales ON libros.id_editorial = editoriales.id
-                ORDER BY libros.id DESC
-            ";
-        
-            if($limite) {
-                $query .= " LIMIT " . intval($limite);
-            }
-        
-            return self::consultarSQL($query);
-        }
-
-
         public static function consultarSQL($query) {
             // Consultar la base de datos
             $resultado = self::$db->query($query);
