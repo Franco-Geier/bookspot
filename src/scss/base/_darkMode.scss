@@ -1,0 +1,52 @@
+@use 'base/variables' as v;
+@use "sass:color";
+
+.dark-mode {
+    background-color: color.adjust(v.$grisOscuro, $lightness: -5%);
+
+    p {
+        color: v.$blanco;
+    }
+
+    a, h1, h2, h3, h4 {
+        color: v.$gris;
+    }
+
+    .dark-mode-boton {
+        filter: brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(0%) hue-rotate(360deg) brightness(1000%);
+    }
+
+    .anuncio, 
+    .anuncio-detalles,
+    .formulario {
+        background-color: color.adjust(v.$grisOscuro, $lightness: 8%);
+    }
+
+    .texto-nosotros {
+        blockquote {
+            color: v.$gris;
+        }
+    }
+
+    .detalles-libro ul {
+        color: v.$blanco;
+    }
+
+    .formulario {
+        border: 1px solid color.adjust(v.$grisOscuro, $lightness: 30%);
+
+        label,
+        legend,
+        p {
+            color: v.$gris;
+        }
+
+        input:not([type="submit"]),
+        textarea,
+        select {
+            background-color: v.$grisOscuro;
+            border: 1px solid v.$grisOscuro;
+            color: v.$blanco;
+        }
+    }
+}

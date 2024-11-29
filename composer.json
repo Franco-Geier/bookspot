@@ -1,0 +1,19 @@
+{
+    "name": "geier/bookspot",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Franco Geier",
+            "email": "francoyogeier@gmail.com"
+        }
+    ],
+    "require": {
+        "intervention/image": "^3.9"
+    }
+}

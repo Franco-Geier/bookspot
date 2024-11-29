@@ -1,0 +1,55 @@
+@use 'base/variables' as v;
+
+// Alertas
+.contenedor-alertas {
+    width: min(70rem, 100%);
+    margin: 0 auto;
+}
+.alerta {
+    padding: .5rem;
+    text-align: center;
+    color: v.$blanco;
+    font-weight: v.$bold;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    border-radius: 1rem;
+
+    &.error {
+        background-color: v.$rojo;
+    }
+
+    &.exito {
+        background-color: v.$verde;
+    }
+}
+
+// Tabla
+.table-dark thead {
+    background-color: v.$verde;
+    --bs-table-bg: v.$verde;
+}
+
+table.libros {
+    margin-top: 4rem;
+    border-spacing: 0;
+
+    thead {
+        th {
+            padding: 2rem 7rem 2rem .5rem;
+        }
+    }
+
+    .imagen-tabla {
+        width: 10rem;
+        border-radius: 1rem;
+    }
+}
+
+.tabla-celda {
+    overflow-wrap: anywhere;
+}
+
+.imagen-small {
+    border-radius: 1rem;
+    width: 20rem;
+}
