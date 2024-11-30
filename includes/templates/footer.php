@@ -3,9 +3,9 @@
                 <nav class="navegacion-footer navegacion">
                     <ul>
                         <li><a href="/31-bookspot/bookspot/nosotros.php">Nosotros</a></li>
-                        <li><a href="/31-bookspot/bookspot/anuncios.php">Anuncios</a></li>
                         <li><a href="/31-bookspot/bookspot/blog.php">Blog</a></li>
                         <li><a href="/31-bookspot/bookspot/contacto.php">Contacto</a></li>
+                        <li><a href="/31-bookspot/bookspot/anuncios.php">Libros</a></li>
                     </ul>
                 </nav>
             </div>

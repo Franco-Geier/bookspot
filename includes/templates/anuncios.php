@@ -14,8 +14,8 @@
                 </a>
                 <div class="contenido-anuncio">
                     <h3><?php echo s($libro->titulo) . " - " . s($libro->autor); ?></h3>
-                    <p><small>Editorial: <?php echo s($libro->editorial); ?></small></p>
-                    <p><small>Categoría: <?php echo s($libro->categoria); ?></small></p>
+                    <p><strong>Editorial: </strong><small><?php echo s($libro->editorial); ?></small></p>
+                    <p><strong>Categoria: </strong><small><?php echo s($libro->categoria); ?></small></p>
                     <p class="precio">$ <?php echo s($libro->precio); ?></p>
                     <a href="#" class="boton-naranja uppercase">Agregar al carrito</a>
                 </div>

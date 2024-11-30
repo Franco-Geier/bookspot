@@ -26,6 +26,8 @@
 .detalles-libro {
     
     flex: 1;
+    display: flex;
+    flex-direction: column;
 
     @include m.desktop {
         padding-left: 4rem;
@@ -34,20 +36,33 @@
     h2 {
         margin: 1rem 0;
         line-height: 1.3;
+        align-self: flex-start;
+
+        @include m.tablet {
+            margin-top: 0;
+        }
+    }
+
+    p {
+        overflow-wrap: anywhere;
+        line-height: 1.5;
     }
 
     ul li {
         margin-bottom: .8rem;
-    }
-    
-    ul li strong {
-        font-weight: v.$bold;
-        color: v.$dorado;
     }
 
     ul p.precio-libro{
         color: v.$verde;
         font-weight: v.$bold;
         font-size: 2.9rem;
+    }
+
+    button {
+        align-self: normal;
+
+        @include m.desktop {
+            align-self: flex-start;
+        }
     }
 }
