@@ -49,8 +49,8 @@
 
     <section class="imagen-contacto">
         <div class="contenedor contenido-contacto">
-            <h2>Encuentra el auto de tus sueños</h2>
-            <p>LLena el formulario de contacto y un asesor se pondrá en contacto contigo a la brevedad</p>
+            <h2>¿Tienes alguna consulta?</h2>
+            <p>Si tienes preguntas sobre nuestros libros o servicios, llena el formulario y nos pondremos en contacto contigo.</p>
             <a href="contacto.php" class="boton-naranja">Contáctanos</a>
         </div>
     </section>

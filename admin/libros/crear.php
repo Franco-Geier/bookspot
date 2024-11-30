@@ -76,7 +76,7 @@
             <?php endforeach; ?>
         </div>
 
-        <form class="formulario mt-3" method="POST" action="/31-bookspot/bookspot/admin/libros/crear.php" enctype="multipart/form-data">
+        <form class="formulario mt-3" method="POST" action="./libros/crear.php" enctype="multipart/form-data">
             <?php include "../../includes/templates/formulario_libros.php"; ?>
 
             <input type="submit" value="Crear Libro" class="boton-verde">

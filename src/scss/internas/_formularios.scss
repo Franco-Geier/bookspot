@@ -14,12 +14,9 @@
     flex-direction: column;
 
     @include m.tablet {
-        .formulario {
-            display: block;
-        } 
+        display: block;
     }
     
- 
     input:not([type="submit"]):focus,
     textarea:focus,
     select:focus {

@@ -83,7 +83,7 @@
 
             if($resultado) {
                 $this->borrarImagen();
-                header("Location: /31-bookspot/bookspot/admin/index.php?resultado=3");
+                header("Location: ./index.php?resultado=3");
                 exit;
             }
         }
@@ -173,6 +173,7 @@
         }
 
         
+        // Trae todos los resultados
         public static function all() {
             $query = "SELECT * FROM " . static::$tabla;
             $resultado = self::consultarSQL($query);
@@ -181,13 +182,14 @@
         }
 
         
-        
+
         // Busca un registro por su id
         public static function find($id) {
-            $query = "SELECT * FROM " . static::$tabla . " WHERE id = ${id}";
+            $query = "SELECT * FROM " . static::$tabla . " WHERE id = " . intval($id) . " LIMIT 1";
             $resultado = self::consultarSQL($query);
             return array_shift($resultado);
         }
+
 
 
         public static function consultarSQL($query) {

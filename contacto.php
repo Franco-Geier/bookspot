@@ -9,10 +9,10 @@
 
     <h1>Contacto</h1>
     <picture>
-        <source srcset="build/img/destacada3.avif" type="image/avif">
-        <source srcset="build/img/destacada3.webp" type="image/webp">
-        <source srcset="build/img/destacada3.jpg" type="image/jpeg">
-        <img src="build/img/destacada3.jpg" alt="Imagen Contacto" loading="lazy">
+        <source srcset="build/img/destacada.avif" type="image/avif">
+        <source srcset="build/img/destacada.webp" type="image/webp">
+        <source srcset="build/img/destacada.jpg" type="image/jpeg">
+        <img src="build/img/destacada.jpg" alt="Imagen Contacto" loading="lazy">
     </picture>
 
     <main class="contenedor seccion">

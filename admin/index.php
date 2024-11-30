@@ -81,7 +81,7 @@
                                         <input type="hidden" name="id" value="<?php echo $libro->id; ?>">
                                         <input type="submit" class="mt-3 boton-rojo" value="Eliminar">
                                     </form>
-                                    <a href="/31-bookspot/bookspot/admin/libros/actualizar.php?id=<?php echo $libro->id; ?>" class="boton-naranja">Actualizar</a>
+                                    <a href="./libros/actualizar.php?id=<?php echo $libro->id; ?>" class="boton-naranja">Actualizar</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -1,3 +1,12 @@
+<?php
+    if(!isset($_SESSION))
+    {
+        session_start();
+    }
+
+    $auth = $_SESSION["login"] ?? false;
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -54,6 +63,9 @@
                                         <?php endif; ?>
                                     </ul>
                                 </li>
+                                <?php if($auth) :?>
+                                    <li class="nav-item"><a class="nav-link p-0" href="/31-bookspot/bookspot/cerrar-sesion.php">Cerrar Sesión</a></li>
+                                <?php endif; ?>    
                             </ul>
                             
                             <form class="d-flex my-4 my-lg-0" role="search">
