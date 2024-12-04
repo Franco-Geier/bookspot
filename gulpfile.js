@@ -39,7 +39,7 @@ async function imagenes() {
     };
     return src(paths.imagenes)
         .pipe(imagemin(opciones.plugins))  // Aplicar optimizadores de gulp-imagemin
-        .pipe(dest('build/img'))
+        .pipe(dest('./public/build/img'))
         .pipe(notify({ message: 'Imagen Completada' }));
 }
 
@@ -51,7 +51,7 @@ async function versionWebp() {
     };
     return src(paths.imagenes)
         .pipe(webp(opciones))
-        .pipe(dest('build/img'))
+        .pipe(dest('./public/build/img'))
         .pipe(notify({ message: 'Imagen Completada' }));
 }
 
@@ -62,7 +62,7 @@ function versionAvif() {
     };
     return src(paths.imagenes)
         .pipe(avif(opciones))
-        .pipe(dest('build/img'))
+        .pipe(dest('./public/build/img'))
         .pipe(notify({ message: 'Imagen Completada' }));
 }
 
@@ -74,7 +74,7 @@ function css() {
         .pipe(sass({outputStyle: 'expanded'}))  // Compilar SASS a CSS
         .pipe(postcss([autoprefixer(), cssnano()]))
         .pipe(sourcemaps.write("."))
-        .pipe(dest("build/css"));  // Almacenar en la carpeta build
+        .pipe(dest("./public/build/css"));  // Almacenar en la carpeta build
 }
 
 
@@ -85,7 +85,7 @@ function javascript() {
         .pipe(terser())
         .pipe(sourcemaps.write("."))
         .pipe(rename({ suffix: '.min' }))
-        .pipe(dest('build/js'));
+        .pipe(dest('./public/build/js'));
 }
 
 

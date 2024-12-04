@@ -2,26 +2,7 @@
 
     define("TEMPLATES_URL", __DIR__ . "/templates");
     define("FUNCIONES_URL", __DIR__ . "funciones.php");
-    define("CARPETA_IMAGENES", __DIR__ . "/../imagenes/");
-
-    function incluirTemplate(
-        string $nombre, 
-        bool $inicio = false, 
-        string $titulo = "BookSpot", 
-        string $descripcion = "BookSpot es tu plataforma de confianza para libros.",
-        array $datos = []
-    ) {
-        extract($datos);
-        include TEMPLATES_URL . "/${nombre}.php";
-    }
-
-    function estaAutenticado() {
-        session_start();
-
-        if(!$_SESSION["login"]) {
-            header("Location: ../");
-        }
-    }
+    define("CARPETA_IMAGENES", "imagenes/");
 
     function debuguear($variable) {
         echo "<pre>";
@@ -56,4 +37,15 @@
                 break;
         }
         return $mensaje;
+    }
+
+    
+    function validarORedireccionar(string $url) {
+        // Validar la URL por ID válido
+        $id = filter_var($_GET["id"] ?? null, FILTER_VALIDATE_INT);
+        if (!$id) {
+            header("location: $url");
+            exit;
+        }
+        return $id;
     }

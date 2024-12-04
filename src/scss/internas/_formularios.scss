@@ -66,6 +66,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        label {
+            margin-bottom: 0;
+        }
     }
 
     input[type="radio"] {
