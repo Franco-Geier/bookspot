@@ -29,12 +29,6 @@
     $router->get("/contacto", [PaginasController::class, "contacto"]);
     $router->post("/contacto", [PaginasController::class, "contacto"]);
 
-    // Login y autenticación de Admins
-    $router->get("/login-admin", [LoginController::class, "loginAdmin"]);
-    $router->post("/login-admin", [LoginController::class, "loginAdmin"]);
-    $router->get("/logout-admin", [LoginController::class, "logoutAdmin"]);
-
-
     // Crear cuenta de Usuarios
     $router->get('/registrar', [UsuarioController::class, 'registrar']);
     $router->post('/registrar', [UsuarioController::class, 'registrar']);
@@ -58,6 +52,17 @@
     $router->get('/carrito', [CarritoController::class, 'index']);
     $router->post('/carrito/agregar', [CarritoController::class, 'agregar']);
     $router->post('/carrito/eliminar', [CarritoController::class, 'eliminar']);
+    $router->post('/carrito/vaciar', [CarritoController::class, 'vaciar']);
+    $router->post('/carrito/actualizar', [CarritoController::class, 'actualizar']);
 
+
+    $router->post('/carrito/toggle', [CarritoController::class, 'toggle']);
+    $router->get('/carrito/contar', [CarritoController::class, 'contar']);
+
+
+    // $router->get('/cart', [CartController::class, 'mostrarCarrito']);
+    // $router->post('/cart/agregar', [CartController::class, 'agregar']);
+    // $router->post('/cart/eliminar', [CartController::class, 'eliminar']);
+    // $router->post('/cart/vaciar', [CartController::class, 'vaciar']);
 
     $router->comprobarRutas();

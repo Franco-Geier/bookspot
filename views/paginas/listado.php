@@ -10,11 +10,21 @@
                     <p><strong>Editorial: </strong><small><?php echo s($libro->editorial); ?></small></p>
                     <p><strong>Categoria: </strong><small><?php echo s($libro->categoria); ?></small></p>
                     <p class="precio">$ <?php echo s($libro->precio); ?></p>
-                    <a href="#" class="boton-naranja uppercase">Agregar al carrito</a>
+                    
+                    <!-- Botón para agregar al carrito -->
+                    <form method="POST" action="/bookspot/public/index.php/carrito/agregar">
+                        <input type="hidden" name="id_libro" value="<?php echo s($libro->id); ?>">
+                        <button 
+                            type="button" 
+                            class="boton-naranja uppercase add-to-cart" 
+                            data-id="<?php echo s($libro->id); ?>">
+                            <?php echo in_array($libro->id, $carritoLibros) ? "Quitar del carrito" : "Agregar al carrito"; ?>
+                        </button>
+                    </form>
                 </div>
             </div>
         <?php endforeach; ?>
-        <?php else: ?>
-            <p>No hay libros disponibles.</p>
+    <?php else: ?>
+        <p>No hay libros disponibles.</p>
     <?php endif; ?>
-</div> <!--.contenedor-anuncios-->
+</div>

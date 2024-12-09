@@ -90,4 +90,54 @@ function eventListener() {
     // Muestra campos condicionales
     const metodoContacto = document.querySelectorAll('input[name="contacto[contacto]"');
     metodoContacto.forEach(input => input.addEventListener("click", mostrarMetodosContacto));
+
+
+    actualizarContadorCarrito();
+
+
+    // Escuchar clics en los botones de agregar al carrito
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', async function (event) {
+            const idLibro = this.dataset.id;
+            try {
+                const response = await fetch('/bookspot/public/index.php/carrito/agregar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id_libro: idLibro })
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    actualizarContadorCarrito();
+                    // Cambiar el texto del botón
+                    this.textContent = data.status === 'added' ? 'Quitar del carrito' : 'Agregar al carrito';
+                } else {
+                    console.error('Error al agregar al carrito.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    });
 }
+
+
+
+// Función para obtener el total de productos del carrito
+async function actualizarContadorCarrito() {
+    try {
+        const response = await fetch('/bookspot/public/index.php/carrito/contar');
+        if (response.ok) {
+            const data = await response.json();
+            const contador = document.querySelector('.cart-count');
+            if (contador) {
+                contador.textContent = data.count;
+            }
+        }
+    } catch (error) {
+        console.error('Error al obtener el conteo del carrito:', error);
+    }
+}
+
+

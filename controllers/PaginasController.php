@@ -4,6 +4,7 @@
     use Model\Libro;
     use Model\Categoria;
     use Model\Contacto;
+    use Model\Carrito;
     use PHPMailer\PHPMailer\PHPMailer;
 
     class PaginasController {
@@ -14,8 +15,17 @@
             $libros = Libro::librosConRelaciones(3);
             $categorias = Categoria::all();
 
+            $idUsuario = $_SESSION['id'] ?? null;
+             // Si hay un usuario autenticado, obtenemos los libros en el carrito
+            $carritoLibros = [];
+            if ($idUsuario) {
+                $carrito = Carrito::whereAll('id_usuario', $idUsuario);
+                $carritoLibros = array_column($carrito, 'id_libro'); // Extrae solo los IDs
+            }
+
             $router->render("paginas/index", [
                 "libros" => $libros,
+                "carritoLibros" => $carritoLibros,
                 "categorias" => $categorias,
                 "inicio" => $inicio,
                 "titulo" => $titulo,
@@ -43,9 +53,18 @@
             $libros = Libro::librosConRelaciones();
             $categorias = Categoria::all();
 
+            $idUsuario = $_SESSION['id'] ?? null;
+            // Si hay un usuario autenticado, obtenemos los libros en el carrito
+            $carritoLibros = [];
+            if ($idUsuario) {
+                $carrito = Carrito::whereAll('id_usuario', $idUsuario);
+                $carritoLibros = array_column($carrito, 'id_libro'); // Extrae solo los IDs
+            }
+
             $router->render("paginas/libros", [
                 "categorias" => $categorias,
                 "libros" => $libros,
+                "carritoLibros" => $carritoLibros,
                 "titulo" => $titulo,
                 "descripcion" => $descripcion
             ]);
@@ -82,6 +101,14 @@
             // Obtener los libros que pertenecen a la categoría seleccionada
             $libros = Libro::where('id_categoria', $id) ?? [];
 
+            $idUsuario = $_SESSION['id'] ?? null;
+            // Si hay un usuario autenticado, obtenemos los libros en el carrito
+            $carritoLibros = [];
+            if ($idUsuario) {
+                $carrito = Carrito::whereAll('id_usuario', $idUsuario);
+                $carritoLibros = array_column($carrito, 'id_libro'); // Extrae solo los IDs
+            }
+
             // Comprobar si la categoría existe
             $categoria = Categoria::find($id);
             if (!$categoria) {
@@ -92,6 +119,7 @@
             $router->render("paginas/categorias", [
                 "categorias" => $categorias,
                 "libros" => $libros,
+                "carritoLibros" => $carritoLibros,
                 "categoria" => $categoria,
                 "titulo" => $titulo,
                 "descripcion" => $descripcion

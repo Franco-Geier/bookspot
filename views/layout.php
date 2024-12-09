@@ -50,55 +50,63 @@
                         </div>
 
                         <div class="ps-5 offcanvas-body navegacion justify-content-end align-items-center">
-                        <ul class="navbar-nav me-lg-4">
-                            <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/nosotros">Nosotros</a></li>
-                            <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/blog">Blog</a></li>
-                            <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/contacto">Contacto</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
-                                <ul class="dropdown-menu">
-                                    <?php if (!empty($categorias)): ?>
-                                        <?php foreach ($categorias as $categoria): ?>
-                                            <li>
-                                                <a class="dropdown-item" href="/bookspot/public/index.php/categorias?id=<?php echo s($categoria->id); ?>">
-                                                    <?php echo s($categoria->nombre); ?>
-                                                </a>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <li><a class="dropdown-item" href="#">No hay categorías disponibles</a></li>
-                                    <?php endif; ?>
-                                </ul>
-                            </li>
-
-                            <?php if ($auth): ?>
+                            <ul class="navbar-nav me-lg-4">
+                                <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/nosotros">Nosotros</a></li>
+                                <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/blog">Blog</a></li>
+                                <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/contacto">Contacto</a></li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Hola, <?php echo s($_SESSION["nombre"], ENT_QUOTES, "UTF-8"); ?>
-                                    </a>
+                                    <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="/bookspot/public/index.php/perfil">Mi Perfil</a></li>
-                                        <li><a class="dropdown-item" href="/bookspot/public/index.php/configuracion">Configuración</a></li>
-                                        <?php if ($_SESSION["admin"] === 1): ?>
-                                            <li><a class="dropdown-item" href="/bookspot/public/index.php/admin">Panel Admin</a></li>
+                                        <?php if (!empty($categorias)): ?>
+                                            <?php foreach ($categorias as $categoria): ?>
+                                                <li>
+                                                    <a class="dropdown-item" href="/bookspot/public/index.php/categorias?id=<?php echo s($categoria->id); ?>">
+                                                        <?php echo s($categoria->nombre); ?>
+                                                    </a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <li><a class="dropdown-item" href="#">No hay categorías disponibles</a></li>
                                         <?php endif; ?>
-                                        <li><a class="dropdown-item" href="/bookspot/public/index.php/logout">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
-                            <?php else: ?>
-                                <li class="nav-item">
-                                    <a class="nav-link p-0" href="/bookspot/public/index.php/login">Iniciar Sesión</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link p-0" href="/bookspot/public/index.php/registrar">Registrarse</a>
-                                </li>
-                            <?php endif; ?>
-                        </ul>
-                            
+
+                                <?php if ($auth): ?>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Hola, <?php echo s($_SESSION["nombre"], ENT_QUOTES, "UTF-8"); ?>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/bookspot/public/index.php/perfil">Mi Perfil</a></li>
+                                            <li><a class="dropdown-item" href="/bookspot/public/index.php/configuracion">Configuración</a></li>
+                                            <?php if ($_SESSION["admin"] === 1): ?>
+                                                <li><a class="dropdown-item" href="/bookspot/public/index.php/admin">Panel Admin</a></li>
+                                            <?php endif; ?>
+                                            <li><a class="dropdown-item" href="/bookspot/public/index.php/logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                <?php else: ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link p-0" href="/bookspot/public/index.php/login">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link p-0" href="/bookspot/public/index.php/registrar">Signup</a>
+                                    </li>
+                                <?php endif; ?>
+                            </ul>
+                                
                             <form class="d-flex my-4 my-lg-0" role="search">
                                 <input class="form-control me-lg-4" type="search" placeholder="Buscar" aria-label="Search">
                             </form>
-                            <img class="dark-mode-boton" src="/bookspot/public/build/img/dark-mode.svg" alt="Icono DarkMode">
+
+                            <!-- Botón Dark -->
+                            <img class="dark-mode-boton mb-4 mb-lg-0 me-lg-4" src="/bookspot/public/build/img/dark-mode.svg" alt="Icono DarkMode">
+                                
+                            <!-- Carrito de compras -->
+                            <a class="nav-link p-0 contenedor-cart" href="/bookspot/public/index.php/carrito">
+                                <img src="/bookspot/public/build/img/cart.svg" alt="Carrito de compras" class="cart-icon">
+                                <span class="cart-count badge">0</span>
+                            </a>
                         </div>
                     </div>
                 </div>
