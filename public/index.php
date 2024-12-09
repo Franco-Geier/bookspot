@@ -5,6 +5,8 @@
     use Controllers\LibroController;
     use Controllers\PaginasController;
     use Controllers\LoginController;
+    use Controllers\UsuarioController;
+    use Controllers\CarritoController;
 
     $router = new Router();
 
@@ -27,10 +29,35 @@
     $router->get("/contacto", [PaginasController::class, "contacto"]);
     $router->post("/contacto", [PaginasController::class, "contacto"]);
 
-
-    // Login y autenticación
+    // Login y autenticación de Admins
     $router->get("/login-admin", [LoginController::class, "loginAdmin"]);
     $router->post("/login-admin", [LoginController::class, "loginAdmin"]);
     $router->get("/logout-admin", [LoginController::class, "logoutAdmin"]);
+
+
+    // Crear cuenta de Usuarios
+    $router->get('/registrar', [UsuarioController::class, 'registrar']);
+    $router->post('/registrar', [UsuarioController::class, 'registrar']);
+
+    // Iniciar Sesión
+    $router->get('/login', [UsuarioController::class, 'login']);
+    $router->post('/login', [UsuarioController::class, 'login']);
+    $router->get('/logout', [UsuarioController::class, 'logout']);
+    
+    // Recuperar Password
+    $router->get('/olvide', [UsuarioController::class, 'olvide']);
+    $router->post('/olvide', [UsuarioController::class, 'olvide']);
+    $router->get('/recuperar', [UsuarioController::class, 'recuperar']);
+    $router->post('/recuperar', [UsuarioController::class, 'recuperar']);
+
+    // Confirmar cuenta
+    $router->get("/confirmar-cuenta", [UsuarioController::class, 'confirmar']);
+    $router->get("/mensaje", [UsuarioController::class, 'mensaje']);
+
+    // carrito
+    $router->get('/carrito', [CarritoController::class, 'index']);
+    $router->post('/carrito/agregar', [CarritoController::class, 'agregar']);
+    $router->post('/carrito/eliminar', [CarritoController::class, 'eliminar']);
+
 
     $router->comprobarRutas();

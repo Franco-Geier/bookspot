@@ -4,10 +4,8 @@
     class ActiveRecord {
         // Propiedad para la conexión
         protected static $db;
-
         // Mapeo de columnas
         protected static $columnasDB = [];
-
         protected static $tabla = "";
 
         // Validaciones
@@ -19,19 +17,19 @@
         }
 
 
-        public function guardar() {
+        public function guardar($redirect = true) {
             if(!is_null($this->id)) {
                 // Actualizar
-                $this->actualizar();
+                return $this->actualizar($redirect);
             } else {
                 // creando nuevo registro
-                $this->crear();
+                return $this->crear($redirect);
             }
         }
 
 
         // Guardar un nuevo registro
-        public function crear() {
+        public function crear($redirect = true) {
             // Sanitizar los datos
             $atributos = $this->SanitizarAtributos();
 
@@ -45,15 +43,16 @@
             $resultado = self::$db->query($query);
 
             // Mensaje de exito
-            if($resultado) {
+            if($resultado && $redirect) {
                 header("Location: ../admin?resultado=1"); // Redireccionar con mensaje de éxito
                 exit;
             }
+            return $resultado;
         }
 
 
         // Actualizar un registro
-        public function actualizar() {
+        public function actualizar($redirect = true) {
             // Sanitizar los datos
             $atributos = $this->SanitizarAtributos();
 
@@ -69,19 +68,20 @@
 
             $resultado = self::$db->query($query);
 
-            if($resultado) {
+            if($resultado && $redirect) {
                 header("Location: ../admin?resultado=2");
                 exit;
             }
+            return $resultado;
         }
 
 
         // Eliminar un registro
-        public function eliminar() {
+        public function eliminar($redirect = true) {
             $query = "DELETE FROM " . static::$tabla ." WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
             $resultado = self::$db->query($query);
 
-            if($resultado) {
+            if($resultado && $redirect) {
                 $this->borrarImagen();
                 header("Location: ../admin?resultado=3");
                 exit;
@@ -93,7 +93,7 @@
         public function atributos() {
             $atributos = [];
             foreach(static::$columnasDB as $columna) {
-                if($columna === "id" || $columna === "creado") continue;
+                if($columna === "id" || $columna === "creado" || $columna === "fecha_registro") continue;
                 $atributos[$columna] = $this->$columna;
             }
             return $atributos;
@@ -180,7 +180,14 @@
             return $resultado;
         }
 
-        
+
+        // Busca un registro por columna y valor
+        public static function where($columna, $valor) {
+            $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+            $resultado = self::consultarSQL($query);
+            return array_shift($resultado);
+        }
+
 
         // Busca un registro por su id
         public static function find($id) {
@@ -188,7 +195,6 @@
             $resultado = self::consultarSQL($query);
             return array_shift($resultado);
         }
-
 
 
         public static function consultarSQL($query) {

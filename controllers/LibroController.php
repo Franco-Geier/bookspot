@@ -11,6 +11,11 @@
     class LibroController {
 
         public static function index(Router $router) {
+
+            if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
+                header("Location: /bookspot/public/index.php");
+                exit;
+            }
             $titulo = "BookSpot - Admin";
             $descripcion = "Zona de administración de libros.";
             $libros = Libro::librosConRelaciones();
@@ -30,6 +35,10 @@
 
 
         public static function crear(Router $router) {
+            if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
+                header("Location: /bookspot/public/index.php");
+                exit;
+            }
             $titulo = "BookSpot - Crear";
             $descripcion = "Zona de creación de libros.";
             $libro = new Libro;
@@ -88,6 +97,10 @@
 
 
         public static function actualizar(Router $router) {
+            if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
+                header("Location: /bookspot/public/index.php");
+                exit;
+            }
             $titulo = "BookSpot - Actualizar";
             $descripcion = "Zona de actualización de libros.";
             $id = validarORedireccionar("../admin");
@@ -150,6 +163,10 @@
 
 
         public static function eliminar() {
+            if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
+                header("Location: /bookspot/public/index.php");
+                exit;
+            }
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 // Validar ID
                 $id = $_POST["id"] ?? null;

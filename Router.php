@@ -28,9 +28,9 @@
             $metodo = $_SERVER["REQUEST_METHOD"];
 
             if($metodo === "GET") {
-                $fn= $this->rutasGET[$urlActual] ?? null;
+                $fn = $this->rutasGET[$urlActual] ?? null;
             } else {
-                $fn= $this->rutasPOST[$urlActual] ?? null;
+                $fn = $this->rutasPOST[$urlActual] ?? null;
             }
             
             // Proteger las rutas
@@ -42,7 +42,7 @@
                 // La URL existe y hay una función asociada
                 call_user_func($fn, $this);
             } else {
-                echo "Página No Encontrada";
+                echo "Página No Encontrada o Ruta no Encontrada";
             }
         }
 

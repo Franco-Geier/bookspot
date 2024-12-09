@@ -43,7 +43,7 @@
     function validarORedireccionar(string $url) {
         // Validar la URL por ID válido
         $id = filter_var($_GET["id"] ?? null, FILTER_VALIDATE_INT);
-        if (!$id) {
+        if(!$id) {
             header("location: $url");
             exit;
         }

@@ -10,9 +10,15 @@
         <h2>Llene el formulario de Contacto</h2>
         
         <div class="contenedor-alertas">
-            <?php if($mensaje) { ?>
+            <?php if ($mensaje): ?>
                 <p class="alerta exito"><?php echo s($mensaje); ?></p>
-            <?php } ?>
+            <?php endif; ?>
+
+            <?php if (!empty($errores)): ?>
+                <?php foreach ($errores as $key => $error): ?>
+                    <p class="alerta error"><?php echo s($error); ?></p>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
 
         <form class="formulario" method="POST">
@@ -22,18 +28,18 @@
                 <div class="formulario-nombres">
                     <div class="campo">
                         <label for="nombre">Nombre</label>
-                        <input type="text" placeholder="Tu nombre" name="contacto[nombre]" autocomplete="given-name" id="nombre" required>
+                        <input type="text" placeholder="Tu nombre" name="contacto[nombre]" autocomplete="given-name" id="nombre" value="<?php echo s($respuestas->nombre); ?>" required>
                     </div>
 
                     <div class="campo">
                         <label for="apellido">Apellido</label>
-                        <input type="text" placeholder="Tu apellido" name="contacto[apellido]" autocomplete="family-name" id="apellido" required>
+                        <input type="text" placeholder="Tu apellido" name="contacto[apellido]" autocomplete="family-name" id="apellido" value="<?php echo s($respuestas->apellido); ?>" required>
                     </div>
                 </div>
 
                 <div class="campo">
                     <label for="mensaje">Mensaje:</label>
-                    <textarea name="contacto[mensaje]" id="mensaje" required></textarea>
+                    <textarea name="contacto[mensaje]" id="mensaje" required><?php echo s($respuestas->mensaje); ?></textarea>
                 </div>
                 
             </fieldset>

@@ -3,7 +3,6 @@
 @use "sass:color";
 
 .formulario {
-
     width: min(70rem, 100%);
     margin: 0 auto;
     background-color: color.adjust(v.$gris, $lightness: 1%);
@@ -116,5 +115,22 @@
             text-align: left;
         }
     }
+}
+
+.acciones {
+    @include m.tablet {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    a {
+        color: v.$verde;
+        display: block;
+        margin: 1.3rem 0;
+        text-align: center;
+        font-size: large;
+        font-weight: 600;
+    }  
 }
 

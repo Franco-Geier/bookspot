@@ -1,6 +1,5 @@
 <?php
-    if(!isset($_SESSION))
-    {
+    if(!isset($_SESSION)) {
         session_start();
     }
 
@@ -51,37 +50,54 @@
                         </div>
 
                         <div class="ps-5 offcanvas-body navegacion justify-content-end align-items-center">
-                            <ul class="navbar-nav me-lg-4">
-                                <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/nosotros">Nosotros</a></li>
-                                <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/blog">Blog</a></li>
-                                <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/contacto">Contacto</a></li>
+                        <ul class="navbar-nav me-lg-4">
+                            <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/nosotros">Nosotros</a></li>
+                            <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/blog">Blog</a></li>
+                            <li class="nav-item"><a class="nav-link p-0" href="/bookspot/public/index.php/contacto">Contacto</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                                <ul class="dropdown-menu">
+                                    <?php if (!empty($categorias)): ?>
+                                        <?php foreach ($categorias as $categoria): ?>
+                                            <li>
+                                                <a class="dropdown-item" href="/bookspot/public/index.php/categorias?id=<?php echo s($categoria->id); ?>">
+                                                    <?php echo s($categoria->nombre); ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <li><a class="dropdown-item" href="#">No hay categorías disponibles</a></li>
+                                    <?php endif; ?>
+                                </ul>
+                            </li>
+
+                            <?php if ($auth): ?>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>
+                                    <a class="nav-link dropdown-toggle p-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Hola, <?php echo s($_SESSION["nombre"], ENT_QUOTES, "UTF-8"); ?>
+                                    </a>
                                     <ul class="dropdown-menu">
-                                        <?php if (!empty($categorias)): ?>
-                                            <?php foreach ($categorias as $categoria): ?>
-                                                <li>
-                                                    <a class="dropdown-item" href="/bookspot/public/index.php/categorias?id=<?php echo s($categoria->id); ?>">
-                                                        <?php echo s($categoria->nombre); ?>
-                                                    </a>
-                                                </li>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <li><a class="dropdown-item" href="#">No hay categorías disponibles</a></li>
+                                        <li><a class="dropdown-item" href="/bookspot/public/index.php/perfil">Mi Perfil</a></li>
+                                        <li><a class="dropdown-item" href="/bookspot/public/index.php/configuracion">Configuración</a></li>
+                                        <?php if ($_SESSION["admin"] === 1): ?>
+                                            <li><a class="dropdown-item" href="/bookspot/public/index.php/admin">Panel Admin</a></li>
                                         <?php endif; ?>
+                                        <li><a class="dropdown-item" href="/bookspot/public/index.php/logout">Cerrar Sesión</a></li>
                                     </ul>
                                 </li>
-                                <?php if($auth && $isAdmin) :?>
-                                    <li class="nav-item">
-                                        <a class="nav-link p-0" href="/bookspot/public/index.php/logout-admin">Cerrar Sesión</a>
-                                    </li>
-                                <?php endif; ?> 
-                            </ul>
+                            <?php else: ?>
+                                <li class="nav-item">
+                                    <a class="nav-link p-0" href="/bookspot/public/index.php/login">Iniciar Sesión</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link p-0" href="/bookspot/public/index.php/registrar">Registrarse</a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                             
                             <form class="d-flex my-4 my-lg-0" role="search">
                                 <input class="form-control me-lg-4" type="search" placeholder="Buscar" aria-label="Search">
                             </form>
-
                             <img class="dark-mode-boton" src="/bookspot/public/build/img/dark-mode.svg" alt="Icono DarkMode">
                         </div>
                     </div>

@@ -3,6 +3,7 @@
     use MVC\Router;
     use Model\Libro;
     use Model\Categoria;
+    use Model\Contacto;
     use PHPMailer\PHPMailer\PHPMailer;
 
     class PaginasController {
@@ -114,7 +115,7 @@
 
         public static function entrada(Router $router) {
             $titulo = "BookSpot - Entrada";
-            $descripcion = "Visita nuestraa entradaa del blog";
+            $descripcion = "Visita nuestra entrada del blog";
             $categorias = Categoria::all();
 
             $router->render("paginas/entrada", [
@@ -129,60 +130,67 @@
             $titulo = "BookSpot - Contacto";
             $descripcion = "Contáctanos si tienes dudas";
             $mensaje = null;
+            $errores = [];
             $categorias = Categoria::all();
+            $respuestas = new Contacto($_POST["contacto"] ?? []);
 
             if($_SERVER["REQUEST_METHOD"] === "POST") {
-                $respuestas = $_POST["contacto"];
+                // Sanitizar datos
+                $respuestas->sanitizar();
+                // Validar datos
+                $errores = $respuestas->validar();
 
-                // Crear una instancia de PHPMailer
-                $mail = new PHPMailer();
-                // Configurar SMTP (Protocolo)
-                $mail->isSMTP();
-                $mail->Host = "sandbox.smtp.mailtrap.io";
-                $mail->SMTPAuth = true;
-                $mail->Username = 'b0ba581ebf57f6';
-                $mail->Password = '189d63aa39f836';
-                $mail->SMTPSecure = "tls";
-                $mail->Port = 2525;
+                if (empty($errores)) {
+                    // Crear una instancia de PHPMailer
+                    $mail = new PHPMailer();
+                    // Configurar SMTP (Protocolo)
+                    $mail->isSMTP();
+                    $mail->Host = "sandbox.smtp.mailtrap.io";
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'b0ba581ebf57f6';
+                    $mail->Password = '189d63aa39f836';
+                    $mail->SMTPSecure = "tls";
+                    $mail->Port = 2525;
 
-                // Configurar el contenido del mail
-                $mail->setFrom("admin@bookspot.com"); // Quien envia el email
-                $mail->addAddress("admin@bookspot.com", "BookSpot.com"); // A que email va a llegar el correo
-                
-                // Habilitar HTML
-                $mail->isHTML(true);
-                $mail->CharSet = "UTF-8";
+                    // Configurar el contenido del mail
+                    $mail->setFrom("admin@bookspot.com"); // Quien envia el email
+                    $mail->addAddress("admin@bookspot.com", "BookSpot.com"); // A que email va a llegar el correo
+                    
+                    // Habilitar HTML
+                    $mail->isHTML(true);
+                    $mail->CharSet = "UTF-8";
 
-                // Contenido
-                $mail->Subject = "Tienes un nuevo mensaje"; // El asunto que el usuario va a leer
-                
-                $contenido = "<html>";
-                $contenido .= "<p>Tienes un nuevo mensaje</p>";
-                $contenido .= "<p>Nombre: " . $respuestas["nombre"] . "</p>";
-                $contenido .= "<p>Apellido: " . $respuestas["apellido"] . "</p>";
+                    // Contenido
+                    $mail->Subject = "Tienes un nuevo mensaje"; // El asunto que el usuario va a leer
+                    
+                    $contenido = "<html>";
+                    $contenido .= "<p>Tienes un nuevo mensaje</p>";
+                    $contenido .= "<p>Nombre: " . $respuestas["nombre"] . "</p>";
+                    $contenido .= "<p>Apellido: " . $respuestas["apellido"] . "</p>";
 
-                // Enviar de forma condicional algunos campos de email o teléfono
-                if ($respuestas["contacto"] === "telefono") {
-                    $contenido .= "<p>Eligió ser contactado por Teléfono:</p>";
-                    $contenido .= "<p>Teléfono: " . ($respuestas["tel"] ?? "No especificado") . "</p>";
-                    $contenido .= "<p>Fecha contacto: " . ($respuestas["fecha"] ?? "No especificado") . "</p>";
-                    $contenido .= "<p>Hora: " . ($respuestas["hora"] ?? "No especificado") . "</p>";
-                } else { 
-                    $contenido .= "<p>Eligió ser contactado por Email:</p>";
-                    $contenido .= "<p>Email: " . ($respuestas["email"] ?? "No especificado") . "</p>";
-                }
+                    // Enviar de forma condicional algunos campos de email o teléfono
+                    if ($respuestas["contacto"] === "telefono") {
+                        $contenido .= "<p>Eligió ser contactado por Teléfono:</p>";
+                        $contenido .= "<p>Teléfono: " . ($respuestas["tel"] ?? "No especificado") . "</p>";
+                        $contenido .= "<p>Fecha contacto: " . ($respuestas["fecha"] ?? "No especificado") . "</p>";
+                        $contenido .= "<p>Hora: " . ($respuestas["hora"] ?? "No especificado") . "</p>";
+                    } else { 
+                        $contenido .= "<p>Eligió ser contactado por Email:</p>";
+                        $contenido .= "<p>Email: " . ($respuestas["email"] ?? "No especificado") . "</p>";
+                    }
 
-                $contenido .= "<p>Mensaje: " . ($respuestas["mensaje"] ?? "No especificado") . "</p>";
-                $contenido .= "</html>";
-                
-                $mail->Body = $contenido;
-                $mail->AltBody = "Esto es un texto alternativo sin HTML";
+                    $contenido .= "<p>Mensaje: " . ($respuestas["mensaje"] ?? "No especificado") . "</p>";
+                    $contenido .= "</html>";
+                    
+                    $mail->Body = $contenido;
+                    $mail->AltBody = "Esto es un texto alternativo sin HTML";
 
-                // Envira el mail
-                if($mail->send()) {
-                    $mensaje = "Mensaje enviado correctamente";
-                } else {
-                    $mensaje = "El mensaje no se pudo enviar...";
+                    // Envira el mail
+                    if($mail->send()) {
+                        $mensaje = "Mensaje enviado correctamente";
+                    } else {
+                        $mensaje = "El mensaje no se pudo enviar...";
+                    }
                 }
             }
 
@@ -190,7 +198,9 @@
                 "categorias" => $categorias,
                 "titulo" => $titulo,
                 "descripcion" => $descripcion,
-                "mensaje" => $mensaje
+                "mensaje" => $mensaje,
+                "errores" => $errores,
+                "respuestas" => $respuestas
             ]);
         }
     }
