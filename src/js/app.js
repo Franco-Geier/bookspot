@@ -120,6 +120,16 @@ function eventListener() {
             }
         });
     });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchIcon = document.querySelector("#search-icon");
+        searchIcon.addEventListener("click", function (event) {
+            event.preventDefault();
+            const searchModal = new bootstrap.Modal(document.querySelector("#searchModal"));
+            searchModal.show();
+        });
+    });
 }
 
 
@@ -139,5 +149,3 @@ async function actualizarContadorCarrito() {
         console.error('Error al obtener el conteo del carrito:', error);
     }
 }
-
-

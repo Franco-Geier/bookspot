@@ -63,7 +63,7 @@
                     $imagen = $manager->read($_FILES["libro"]["tmp_name"]["imagen"]); // Cargar la imagen
                     
                     // Redimensionar y ajustar la imagen (por ejemplo, 800x600)
-                    $imagen->cover(800, 600);
+                    $imagen->cover(300, 300);
                     $libro->setImagen($nombreImagen);
                 }
                 
@@ -136,7 +136,7 @@
                     $imagen = $manager->read($_FILES["libro"]["tmp_name"]["imagen"]); // Cargar la imagen
                     
                     // Redimensionar y ajustar la imagen (por ejemplo, 800x600)
-                    $imagen->cover(800, 600);
+                    $imagen->cover(300, 300);
                     $libro->setImagen($nombreImagen);
                 }
         

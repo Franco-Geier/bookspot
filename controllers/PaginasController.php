@@ -77,15 +77,25 @@
             $descripcion = "El producto que seleccionaste";
             $libro = Libro::find($id);
             $categorias = Categoria::all();
-
+        
             if (!$libro) {
                 header("Location: ../");
                 exit;
             }
-
+        
+            $idUsuario = $_SESSION['id'] ?? null;
+        
+            // Si el usuario está autenticado, obtenemos los libros en su carrito
+            $carritoLibros = [];
+            if ($idUsuario) {
+                $carrito = Carrito::whereAll('id_usuario', $idUsuario);
+                $carritoLibros = array_column($carrito, 'id_libro'); // Extrae solo los IDs
+            }
+        
             $router->render("paginas/libro", [
                 "categorias" => $categorias,
                 "libro" => $libro,
+                "carritoLibros" => $carritoLibros,
                 "titulo" => $titulo,
                 "descripcion" => $descripcion
             ]);

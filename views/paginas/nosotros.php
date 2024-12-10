@@ -3,7 +3,7 @@
         
         <div class="contenido-nosotros">
             <div class="texto-nosotros">
-                <blockquote>25 Años de Experiencia</blockquote>
+                <blockquote>10 Años de Experiencia</blockquote>
                 <p>Ed non ligula sit amet magna accumsan egestas euismod in nisl.
                 Vestibulum tempus metus quam, ac rutrum metus elementum sit amet.
                 Nam rhoncus eros et ipsum imperdiet rhoncus. Pellentesque nulla nulla,

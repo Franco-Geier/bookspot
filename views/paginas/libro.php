@@ -19,7 +19,20 @@
                     <p class="precio-libro">$ <?php echo s($libro->precio); ?></p>
                 </ul>
     
-                <button class="boton-naranja">Agregar al carrito</button>
+                <!-- Botón para agregar al carrito -->
+                <form method="POST" action="/bookspot/public/index.php/carrito/agregar">
+                    <input type="hidden" name="id_libro" value="<?php echo s($libro->id); ?>">
+                    <?php if (!empty($_SESSION['id'])): ?>
+                        <button 
+                            type="button" 
+                            class="boton-naranja uppercase add-to-cart" 
+                            data-id="<?php echo s($libro->id); ?>">
+                            <?php echo in_array($libro->id, $carritoLibros) ? "Quitar del carrito" : "Agregar al carrito"; ?>
+                        </button>
+                    <?php else: ?>
+                        <a href="/bookspot/public/index.php/login" class="boton-naranja uppercase">Inicia sesión para comprar</a>
+                    <?php endif; ?>
+                </form>
             </div>
         </section>
     </main>

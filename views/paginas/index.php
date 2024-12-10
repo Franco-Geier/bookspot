@@ -38,10 +38,10 @@
 
                 <div class="texto-entrada">
                     <a href="index.php/entrada">
-                        <h4>Guía para el mantenimiento básico de tu vehículo</h4>
+                        <h4>Cómo conservar libros antiguos</h4>
                         <p class="informacion-meta">Escrito el: <span>23/10/2024</span> por: <span>Admin</span></p>
-                        <p>Mantener tu vehículo en buen estado no solo garantiza una conducción segura, 
-                        sino que también alarga la vida útil de tu auto y ahorra dinero a largo plazo.</p>
+                        <p>Protege tus libros del polvo y la humedad.
+                        Usa fundas de plástico y guárdalos en un lugar seco y ventilado.</p>
                     </a>
                 </div>
             </article>
@@ -58,16 +58,16 @@
 
                 <div class="texto-entrada">
                     <a href="index.php/entrada">
-                        <h4>Comparativas entre modelos: Encuentra el auto que mejor se adapta a ti</h4>
+                        <h4>Mejores libros para leer este año</h4>
                         <p class="informacion-meta">Escrito el: <span>24/10/2024</span> por: <span>Admin</span></p>
-                        <p>Elegir el auto ideal puede ser una tarea abrumadora con tantas opciones disponibles.
-                        En esta comparativa, analizamos algunos de los modelos más populares del año.</p>
+                        <p>Descubre historias inolvidables y éxitos literarios que marcarán este año. 
+                        ¡Haz crecer tu lista de lecturas!</p>
                     </a>
                 </div>
             </article>
         </section>
 
-        <section class="testimoniales">
+        <!-- <section class="testimoniales">
             <h3>Testimoniales</h3>
             <div class="testimonial">
                 <blockquote>
@@ -76,5 +76,5 @@
                 </blockquote>
                 <p>- Juan Pérez</p>
             </div>
-        </section>
+        </section> -->
     </div>

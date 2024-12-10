@@ -5,8 +5,108 @@
     use Model\Libro;
     use Model\Categoria;
     use MVC\Router;
+    use Model\Pedido;
+    use Model\DetallePedido;
 
     class CarritoController {
+
+    // Función para manejar la compra
+    // public static function comprar() {
+    //     if (session_status() === PHP_SESSION_NONE) {
+    //         session_start();
+    //     }
+
+    //     $idUsuario = $_SESSION['id'] ?? null;
+
+    //     if (!$idUsuario) {
+    //         header('Location: /bookspot/public/index.php/login');
+    //         exit;
+    //     }
+
+    //     // Obtener el carrito del usuario
+    //     $carrito = Carrito::obtenerCarritoConLibros($idUsuario);
+
+    //     if (empty($carrito)) {
+    //         $_SESSION['mensaje'] = "El carrito está vacío.";
+    //         header('Location: /bookspot/public/index.php/carrito');
+    //         exit;
+    //     }
+
+    //     // Calcular el total
+    //     $total = array_reduce($carrito, function ($carry, $item) {
+    //         return $carry + ($item->cantidad * $item->libro_precio);
+    //     }, 0);
+
+    // // Crear el pedido
+    // $pedido = new Pedido([
+    //     'id_usuario' => $idUsuario,
+    //     'fecha_pedido' => date('Y-m-d H:i:s'),
+    //     'total' => $total,
+    //     'direccion_envio' => $_SESSION['direccion_envio'] ?? 'Sin especificar',
+    //     'telefono_contacto' => $_SESSION['telefono_contacto'] ?? 'Sin especificar',
+    // ]);
+
+    // if ($pedido->guardar(false)) { // `guardar` llama a `crear` internamente
+    //     echo "Pedido creado con ID: {$pedido->id}"; // Ahora el ID está disponible aquí
+    //     // Crear los detalles del pedido usando $pedido->id
+    // } else {
+    //     echo "Error al crear el pedido";
+    //     exit;
+    // }
+
+    //     // Crear los detalles del pedido
+    //     foreach ($carrito as $item) {
+    //         $detalle = new DetallePedido([
+    //             'id_pedido' => $pedido->id,
+    //             'id_libro' => $item->id_libro,
+    //             'cantidad' => $item->cantidad,
+    //             'precio_unitario' => $item->libro_precio,
+    //         ]);
+    //         $detalle->guardar(false);
+    //     }
+
+    //     // Vaciar el carrito
+    //     foreach ($carrito as $item) {
+    //         $item->eliminar(false);
+    //     }
+
+    //     // Redirigir al detalle del pedido
+    //     header("Location: /bookspot/public/index.php/pedido?id={$pedido->id}");
+    //     exit;
+    // }
+
+
+    // Función para mostrar el detalle del pedido
+    // public static function detalle(Router $router) {
+    //     if (session_status() === PHP_SESSION_NONE) {
+    //         session_start();
+    //     }
+
+    //     $idUsuario = $_SESSION['id'] ?? null;
+    //     $idPedido = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+    //     if (!$idUsuario || !$idPedido) {
+    //         header('Location: /bookspot/public/index.php/login');
+    //         exit;
+    //     }
+
+    //     // Obtener el pedido
+    //     $pedido = Pedido::find($idPedido);
+
+    //     if (!$pedido || $pedido->id_usuario !== $idUsuario) {
+    //         header('Location: /bookspot/public/index.php');
+    //         exit;
+    //     }
+
+    //     // Obtener los detalles del pedido
+    //     $detalles = DetallePedido::whereAll('id_pedido', $idPedido);
+
+    //     $router->render('paginas/detalle-pedido', [
+    //         'pedido' => $pedido,
+    //         'detalles' => $detalles,
+    //     ]);
+    // }
+
 
         public static function index(Router $router) {
             if (session_status() === PHP_SESSION_NONE) {
@@ -153,52 +253,6 @@
         
             header('Location: /bookspot/public/index.php/carrito');
             exit;
-        }
-
-
-        public static function toggle(Router $router) {
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-        
-            $idUsuario = $_SESSION['id'] ?? null;
-        
-            if (!$idUsuario) {
-                header('Location: /bookspot/public/index.php/login');
-                exit;
-            }
-        
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $idLibro = filter_input(INPUT_POST, 'id_libro', FILTER_VALIDATE_INT);
-        
-                if (!$idLibro) {
-                    header('Location: /bookspot/public/index.php/libros');
-                    exit;
-                }
-        
-                // Verificar si el libro ya está en el carrito
-                $carritoExistente = Carrito::consultarSQL("SELECT * FROM carrito WHERE id_usuario = $idUsuario AND id_libro = $idLibro");
-        
-                if ($carritoExistente) {
-                    // Si existe, lo quitamos
-                    $carritoExistente[0]->eliminar();
-                    $status = 'removed';
-                } else {
-                    // Si no existe, lo agregamos
-                    $carrito = new Carrito([
-                        'id_usuario' => $idUsuario,
-                        'id_libro' => $idLibro,
-                        'cantidad' => 1
-                    ]);
-                    $carrito->guardar();
-                    $status = 'added';
-                }
-        
-                // Devolver respuesta para el frontend
-                header('Content-Type: application/json');
-                echo json_encode(['status' => $status]);
-                exit;
-            }
         }
 
 

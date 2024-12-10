@@ -7,6 +7,7 @@
     use Controllers\LoginController;
     use Controllers\UsuarioController;
     use Controllers\CarritoController;
+    use Controllers\BuscarController;
 
     $router = new Router();
 
@@ -48,21 +49,25 @@
     $router->get("/confirmar-cuenta", [UsuarioController::class, 'confirmar']);
     $router->get("/mensaje", [UsuarioController::class, 'mensaje']);
 
+    // Editar Usuario
+    $router->get('/perfil', [UsuarioController::class, 'perfil']);
+    $router->get('/configuracion', [UsuarioController::class, 'configuracion']);
+    $router->post('/configuracion', [UsuarioController::class, 'configuracion']);
+    $router->post('/eliminar-cuenta', [UsuarioController::class, 'eliminarCuenta']);
+
+
     // carrito
     $router->get('/carrito', [CarritoController::class, 'index']);
     $router->post('/carrito/agregar', [CarritoController::class, 'agregar']);
     $router->post('/carrito/eliminar', [CarritoController::class, 'eliminar']);
     $router->post('/carrito/vaciar', [CarritoController::class, 'vaciar']);
     $router->post('/carrito/actualizar', [CarritoController::class, 'actualizar']);
-
-
-    $router->post('/carrito/toggle', [CarritoController::class, 'toggle']);
     $router->get('/carrito/contar', [CarritoController::class, 'contar']);
 
 
-    // $router->get('/cart', [CartController::class, 'mostrarCarrito']);
-    // $router->post('/cart/agregar', [CartController::class, 'agregar']);
-    // $router->post('/cart/eliminar', [CartController::class, 'eliminar']);
-    // $router->post('/cart/vaciar', [CartController::class, 'vaciar']);
+    // $router->get('/buscar', [BuscarController::class, 'buscar']);
+
+    $router->post('/carrito/comprar', [CarritoController::class, 'comprar']);
+    $router->get('/pedido', [CarritoController::class, 'detalle']);
 
     $router->comprobarRutas();

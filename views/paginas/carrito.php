@@ -68,6 +68,13 @@
         <form method="POST" action="carrito/vaciar">
             <input type="submit" class="boton-rojo" value="Vaciar Carrito">
         </form>
+
+        <!-- <div class="botones-carrito">
+            <form method="POST" action="/bookspot/public/index.php/carrito/comprar">
+                <input type="submit" class="boton-verde" value="Comprar">
+            </form>
+        </div> -->
+
     <?php else: ?>
         <p>No tienes productos en tu carrito.</p>
     <?php endif; ?>

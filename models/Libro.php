@@ -12,7 +12,7 @@
             "descripcion", "precio",
             "stock", "id_categoria",
             "id_editorial", "imagen",
-            "creado"
+            "creado", "estado"
         ];
 
 
@@ -27,6 +27,7 @@
         public $id_editorial;
         public $imagen;
         public $creado;
+        public $estado;
 
 
         public function __construct($args = []) {
@@ -40,6 +41,7 @@
             $this->id_editorial = $args["id_editorial"] ?? null;
             $this->imagen = $args["imagen"] ?? null;
             $this->creado = $args["creado"] ?? null;
+            $this->estado = $args['estado'] ?? 1; // Disponible por defecto
         }
 
 
@@ -90,6 +92,23 @@
             return self::consultarSQL($query);
         }
 
+        // public static function buscar($query) {
+        //     $query = self::$db->escape_string($query);
+        //     $sql = "SELECT * FROM libros 
+        //             WHERE titulo LIKE '%$query%' 
+        //                OR autor LIKE '%$query%'";
+        //     $resultados = self::consultarSQL($sql);
+        //     if (empty($resultados)) {
+        //         die("No se encontraron resultados para libros.");
+        //     }
+        //     return $resultados;
+        // }
+
+        
+        public function actualizarEstado() {
+            $this->estado = $this->stock > 0 ? 1 : 0;
+            $this->guardar(false);
+        }
 
 
         public function validar() {

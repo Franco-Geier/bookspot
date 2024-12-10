@@ -7,6 +7,98 @@
     use Classes\Email;
 
     class UsuarioController {
+
+        public static function perfil(Router $router) {
+            $titulo = "BookSpot - Mi Perfil";
+            $descripcion = "Los datos de tu usuario";
+            $categorias = Categoria::all();
+
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+    
+            $idUsuario = $_SESSION['id'] ?? null;
+    
+            if (!$idUsuario) {
+                header('Location: /bookspot/public/index.php/login');
+                exit;
+            }
+    
+            $usuario = Usuario::find($idUsuario);
+    
+            $router->render('paginas/perfil', [
+                'usuario' => $usuario,
+                'titulo' => $titulo,
+                "descripcion" => $descripcion,
+                "categorias" => $categorias
+            ]);
+        }
+    
+
+        public static function configuracion(Router $router) {
+            $titulo = "BookSpot - Configuración";
+            $descripcion = "Cambia los datos de tu Perfil";
+            $categorias = Categoria::all();
+
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+    
+            $idUsuario = $_SESSION['id'] ?? null;
+    
+            if (!$idUsuario) {
+                header('Location: /bookspot/public/index.php/login');
+                exit;
+            }
+    
+            $usuario = Usuario::find($idUsuario);
+            $mensaje = '';
+    
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $usuario->sincronizar($_POST);
+                $errores = $usuario->validar();
+    
+                if (empty($errores)) {
+                    $usuario->guardar(false);
+                    $mensaje = 'Perfil actualizado correctamente.';
+                }
+            }
+    
+            $router->render('paginas/configuracion', [
+                'usuario' => $usuario,
+                'mensaje' => $mensaje,
+                'titulo' => $titulo,
+                "descripcion" => $descripcion,
+                "categorias" => $categorias
+            ]);
+        }
+
+
+
+        public static function eliminarCuenta(Router $router) {
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+    
+            $idUsuario = $_SESSION['id'] ?? null;
+    
+            if (!$idUsuario) {
+                header('Location: /bookspot/public/index.php/login');
+                exit;
+            }
+    
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $usuario = Usuario::find($idUsuario);
+                if ($usuario) {
+                    $usuario->eliminar(false);
+                    session_destroy();
+                    header('Location: /bookspot/public/index.php');
+                    exit;
+                }
+            }
+        }
+
+
         public static function registrar(Router $router) {
             $titulo = "BookSpot - Registrarse";
             $descripcion = "Registrate para acceder a más contenido";

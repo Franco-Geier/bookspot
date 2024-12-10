@@ -95,9 +95,10 @@
                                 <?php endif; ?>
                             </ul>
                                 
-                            <form class="d-flex my-4 my-lg-0" role="search">
-                                <input class="form-control me-lg-4" type="search" placeholder="Buscar" aria-label="Search">
-                            </form>
+                            <!-- Botón lupa en el Navbar -->
+                            <!-- <a href="#" id="search-icon" class="nav-link" data-bs-toggle="modal" data-bs-target="#searchModal">
+                                <img src="/bookspot/public/build/img/search-icon.svg" alt="Buscar" class="mb-4 mb-lg-0 me-lg-4 search-icon">
+                            </a> -->
 
                             <!-- Botón Dark -->
                             <img class="dark-mode-boton mb-4 mb-lg-0 me-lg-4" src="/bookspot/public/build/img/dark-mode.svg" alt="Icono DarkMode">
@@ -139,6 +140,27 @@
             </div>
             <p class="copyright">Todos los derechos reservados <?php echo date("Y"); ?> &copy;</p>
     </footer>
+
+
+    <!-- Modal para el buscador -->
+    <!-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="searchModalLabel">Buscar en BookSpot</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/bookspot/public/index.php/buscar" method="GET">
+                        <div class="input-group">
+                            <input type="search" class="form-control" name="q" placeholder="¿Qué estás buscando?" aria-label="Buscar">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="/bookspot/public/build/js/bundle.min.js"></script>

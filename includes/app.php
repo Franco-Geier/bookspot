@@ -8,5 +8,4 @@
     
     use Model\ActiveRecord;
 
-    ActiveRecord::setDB($db);
-    
+    ActiveRecord::setDB($db);    

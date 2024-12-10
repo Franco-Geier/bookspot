@@ -1,10 +1,7 @@
-<main class="contenedor seccion contenido-centrado">
-        <h1>Guía para el mantenimiento básico de tu vehículo</h1>
+    <main class="contenedor seccion contenido-centrado">
+        <h1>Proin consequat viverra sapien, malesuada tempor.</h1>
    
         <picture>
-            <source srcset="../../public/build/img/destacada2.avif" type="image/avif">
-            <source srcset="../../public/build/img/destacada2.webp" type="image/webp">
-            <source srcset="../../public/build/img/destacada2.jpg" type="image/jpeg">
             <img loading="lazy" src="../../public/build/img/destacada2.jpg" alt="Imagen Del Blog">
         </picture>
 

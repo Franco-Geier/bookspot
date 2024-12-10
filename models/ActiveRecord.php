@@ -28,25 +28,30 @@
         }
 
 
-        // Guardar un nuevo registro
         public function crear($redirect = true) {
             // Sanitizar los datos
             $atributos = $this->SanitizarAtributos();
-
+        
             /** INSERTAR EN LA BASE DE DATOS **/
             $query = "INSERT INTO " . static::$tabla . " ( ";
             $query .= join(', ', array_keys($atributos));
             $query .= " ) VALUES (' ";
             $query .= join("', '", array_values($atributos));
             $query .= " ') ";
-
+        
             $resultado = self::$db->query($query);
-
-            // Mensaje de exito
-            if($resultado && $redirect) {
+        
+            // Obtener el ID del registro insertado
+            if ($resultado) {
+                $this->id = self::$db->insert_id; // Actualiza la propiedad `id` del objeto
+            }
+        
+            // Redireccionar en caso de éxito si está habilitado
+            if ($resultado && $redirect) {
                 header("Location: ../admin?resultado=1"); // Redireccionar con mensaje de éxito
                 exit;
             }
+        
             return $resultado;
         }
 

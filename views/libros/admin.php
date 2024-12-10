@@ -28,6 +28,7 @@
                         <th scope="col">Editorial</th>
                         <th scope="col">Imagen</th>
                         <th scope="col">Creado</th>
+                        <th scope="col">Estado</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -48,6 +49,7 @@
                                     <img src="../imagenes/<?php echo s($libro->imagen); ?>" alt="imagen libro" class="imagen-tabla">
                                 </td>
                                 <td class="tabla-celda" scope="row" data-label="Creado"><?php echo s($libro->creado); ?></td>
+                                <td class="tabla-celda" scope="row" data-label="Estado"><?php echo s($libro->estado); ?></td>
                                 <td scope="row" data-label="Acciones">
                                     <form method="POST" action="./libros/eliminar">
                                         <input type="hidden" name="id" value="<?php echo $libro->id; ?>">
