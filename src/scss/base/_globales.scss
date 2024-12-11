@@ -8,6 +8,9 @@ body {
     font-family: v.$fuente_principal;
     font-size: 1.6rem;
     line-height: 1.8;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
     /* Estilos solo cuando el Offcanvas está abierto */
     overflow: auto !important;
     padding-right: 0 !important;

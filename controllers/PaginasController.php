@@ -241,6 +241,18 @@
                 "respuestas" => $respuestas
             ]);
         }
+
+        public static function error(Router $router) {
+            $titulo = "Página no encontrada";
+            $descripcion = "Página 404 por defecto";
+            $categorias = Categoria::all();
+
+            $router->render("paginas/error", [
+                "titulo" => $titulo,
+                "Descripción" => $descripcion,
+                "categorias" => $categorias
+            ]);
+        }
     }
 
 

@@ -42,7 +42,7 @@
                 // La URL existe y hay una función asociada
                 call_user_func($fn, $this);
             } else {
-                echo "Página No Encontrada o Ruta no Encontrada";
+                header("Location: ./404");
             }
         }
 
